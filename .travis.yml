@@ -1,0 +1,8 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker run -i --rm -v `pwd/output`:/var/jail -v create-chroot.sh:/create-chroot.sh debian:sid bash /create-chroot.sh
+  - ls -alh `pwd`/output/**/*
