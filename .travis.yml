@@ -3,6 +3,11 @@ sudo: required
 services:
   - docker
 
+env:
+  - ARCH=armv7
+  - ARCH=amd64
+
 script:
-  - docker run -i --rm -v `pwd`/output:/var/jail -v `pwd`/create-chroot.sh:/create-chroot.sh debian:sid bash /create-chroot.sh
-  - ls -alh `pwd`/output/**/*
+  - build.sh
+  - ls -alh $(pwd)/output/**/*
+  - cd output && tar czvf ../release.tar.gz .
