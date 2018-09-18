@@ -8,6 +8,6 @@ env:
   - ARCH=amd64
 
 script:
-  - build.sh
+  - ./build.sh
   - ls -alh $(pwd)/output/**/*
   - cd output && tar czvf ../release.tar.gz .
