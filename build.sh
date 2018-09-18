@@ -10,17 +10,11 @@ curl -LO https://github.com/multiarch/qemu-user-static/releases/download/v2.12.0
 file qemu-arm-static
 
 if [ "$ARCH" = "armv7" ]; then
-  docker run -i --rm  --privileged \
+  sudo docker run -i --rm  --privileged \
     -v "$(pwd)/output:/var/jail" \
     -v "$(pwd)/create-chroot.sh:/create-chroot.sh" \
     -v "$(pwd)/qemu-arm-static:/usr/bin/qemu-arm-static" \
     arm32v7/debian:$DEB_VERSION bash /create-chroot.sh
-
-  docker run -i --rm  --privileged \
-    -v "$(pwd)/output:/var/jail" \
-    -v "$(pwd)/create-chroot.sh:/create-chroot.sh" \
-    -v "$(pwd)/qemu-arm-static:/usr/bin/qemu-arm-static" \
-    multiarch/debian-debootstrap:armhf-sid bash /create-chroot.sh
 fi
 
 if [ "$ARCH" = "amd64" ]; then
